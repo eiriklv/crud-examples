@@ -46,22 +46,30 @@ function addIdField(book) {
 }
 
 function getBooks() {
-  return db.collection('books').find().toArray()
+  return db.collection('books')
+  .find({}, {
+    title: 1,
+    author: 1,
+  })
+  .toArray()
   .then((books) => books.map(addIdField));
 }
 
 function getBookById(id) {
-  return db.collection('books').findOne({ _id: ObjectId(id) })
+  return db.collection('books')
+  .findOne({ _id: ObjectId(id) })
   .then(addIdField);
 }
 
 function addBook(book) {
-  return db.collection('books').insertOne(book)
+  return db.collection('books')
+  .insertOne(book)
   .then(addIdField);
 }
 
 function updateBook(book) {
-  return db.collection('books').findOneAndUpdate({ _id: ObjectId(book.id) }, {
+  return db.collection('books')
+  .findOneAndUpdate({ _id: ObjectId(book.id) }, {
     $set: {
       title: book.title,
       author: book.author,
@@ -89,7 +97,7 @@ app.get('/books/:id', function (req, res) {
       return res.status(404).send({ message: 'Unknown book id' });
     }
     res.send(book);
-  })
+  });
 });
 
 app.get('/books', function (req, res) {

@@ -38,15 +38,13 @@ const pool = new Pool({
 });
 
 function getBooks() {
-  return pool.query('SELECT * FROM books')
+  return pool.query('SELECT id, title, author FROM books')
   .then(({ rows }) => {
     return rows.map((book) => {
       return {
         id: book.id,
         author: book.author,
         title: book.title,
-        coverImage: book.cover_image,
-        summary: book.summary,
       };
     });
   });
