@@ -11,7 +11,7 @@ function getBookById(id) {
   .then((res) => res.json());
 }
 
-function postBook(book) {
+function addBook(book) {
   return fetch('/books', {
     method: 'POST',
     headers: {
@@ -230,7 +230,7 @@ async function renderBookForm() {
     /**
      * Post book data to server
      */
-    postBook(bookData)
+    addBook(bookData)
     .then(() => renderBookList())
     .catch(console.log);
   });
