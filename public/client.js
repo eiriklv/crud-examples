@@ -22,16 +22,6 @@ function addBook(book) {
   .then((res) => res.json());
 }
 
-function deleteBookById(id) {
-  return fetch(`/books/${id}`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-  .then((res) => res.json());
-}
-
 function updateBook(book) {
   return fetch(`/books/${book.id}`, {
     method: 'PUT',
@@ -39,6 +29,13 @@ function updateBook(book) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(book)
+  })
+  .then((res) => res.json());
+}
+
+function deleteBookById(id) {
+  return fetch(`/books/${id}`, {
+    method: 'DELETE',
   })
   .then((res) => res.json());
 }
