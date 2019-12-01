@@ -33,7 +33,8 @@ function getBooks() {
 }
 
 function getBookById(id) {
-  return JSON.parse(fs.readFileSync('./books.json')).find((book) => book.id === id);
+  return JSON.parse(fs.readFileSync('./books.json'))
+  .find((book) => book.id === id);
 }
 
 function addBook(book) {
