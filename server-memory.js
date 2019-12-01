@@ -3,11 +3,17 @@
  */
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 /**
  * Create an express app
  */
 const app = express();
+
+/**
+ * Support cross-origin requests
+ */
+app.use(cors());
 
 /**
  * Support JSON and form-data POST bodies

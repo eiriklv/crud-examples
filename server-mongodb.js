@@ -5,11 +5,17 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const { MongoClient, ObjectId } = require('mongodb');
+const cors = require('cors');
 
 /**
  * Create an express app
  */
 const app = express();
+
+/**
+ * Support cross-origin requests
+ */
+app.use(cors());
 
 /**
  * Support JSON and form-data POST bodies
@@ -38,6 +44,9 @@ const client = new MongoClient(url);
  */
 let db;
 
+/**
+ * Helper function to accommodate for the default _id field in MongoDB
+ */
 function addIdField(book) {
   return {
     ...book,
@@ -45,6 +54,9 @@ function addIdField(book) {
   };
 }
 
+/**
+ * Database services
+ */
 function getBooks() {
   return db.collection('books')
   .find({}, {
@@ -162,6 +174,7 @@ client.connect()
 .then(() => {
   /**
    * Create and replace the database object
+   * (we select the "library" database)
    */
   db = client.db('library');
 
